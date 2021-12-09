@@ -11,6 +11,7 @@ class Venue extends Model
     use HasFactory;
 
     public $keyType = 'string';
+    public $timestamps = true;
 
     protected $primaryKey = 'code';
     protected $fillable = ['code', 'name', 'size', 'availability'];

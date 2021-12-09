@@ -35,3 +35,4 @@ Route::delete('/venues/{code}', 'App\Http\Controllers\VenueController@delete');
 
 Route::post('/courses', 'App\Http\Controllers\CourseController@create');
 Route::get('/courses', 'App\Http\Controllers\CourseController@all');
+Route::get('/courses/{code}', 'App\Http\Controllers\CourseController@read');

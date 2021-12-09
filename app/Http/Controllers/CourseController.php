@@ -45,4 +45,18 @@ class CourseController extends Controller
         $courses = Course::all();
         return response()->json($courses);
     }
+
+    public function read(string $code): JsonResponse
+    {
+        $course = Course::findOrFail($code);
+        return response()->json($course);
+    }
+
+    public function delete(string $code): JsonResponse
+    {
+        $course = Course::findOrFail($code);
+        $course->delete();
+
+        return response()->json(["message" => "record deleted"], 202);
+    }
 }
