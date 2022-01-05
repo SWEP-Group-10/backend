@@ -12,7 +12,7 @@ class Department extends Model
 
     public $timestamps = true;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'code'];
 
     public function courses(): BelongsToMany
     {
