@@ -18,21 +18,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/departments', 'App\Http\Controllers\DepartmentController@create');
-Route::get('/departments', 'App\Http\Controllers\DepartmentController@all');
-Route::get('/departments/{id}', 'App\Http\Controllers\DepartmentController@read')
-    ->where('id', '[0-9]+');
-Route::put('/departments/{id}', 'App\Http\Controllers\DepartmentController@update')
-    ->where('id', '[0-9]+');
-Route::delete('/departments/{id}', 'App\Http\Controllers\DepartmentController@delete')
-    ->where('id', '[0-9]+');
+Route::middleware('basicAuth')
+    ->group(function () {
+        Route::post('/departments', 'App\Http\Controllers\DepartmentController@create');
+        Route::get('/departments', 'App\Http\Controllers\DepartmentController@all');
+        Route::get('/departments/{id}', 'App\Http\Controllers\DepartmentController@read')
+            ->where('id', '[0-9]+');
+        Route::put('/departments/{id}', 'App\Http\Controllers\DepartmentController@update')
+            ->where('id', '[0-9]+');
+        Route::delete('/departments/{id}', 'App\Http\Controllers\DepartmentController@delete')
+            ->where('id', '[0-9]+');
 
-Route::post('/venues', 'App\Http\Controllers\VenueController@create');
-Route::get('/venues', 'App\Http\Controllers\VenueController@all');
-Route::get('/venues/{code}', 'App\Http\Controllers\VenueController@read');
-Route::put('/venues/{code}', 'App\Http\Controllers\VenueController@update');
-Route::delete('/venues/{code}', 'App\Http\Controllers\VenueController@delete');
+        Route::post('/venues', 'App\Http\Controllers\VenueController@create');
+        Route::get('/venues', 'App\Http\Controllers\VenueController@all');
+        Route::get('/venues/{code}', 'App\Http\Controllers\VenueController@read');
+        Route::put('/venues/{code}', 'App\Http\Controllers\VenueController@update');
+        Route::delete('/venues/{code}', 'App\Http\Controllers\VenueController@delete');
 
-Route::post('/courses', 'App\Http\Controllers\CourseController@create');
-Route::get('/courses', 'App\Http\Controllers\CourseController@all');
-Route::get('/courses/{code}', 'App\Http\Controllers\CourseController@read');
+        Route::post('/courses', 'App\Http\Controllers\CourseController@create');
+        Route::get('/courses', 'App\Http\Controllers\CourseController@all');
+        Route::get('/courses/{code}', 'App\Http\Controllers\CourseController@read');
+    });
+
+Route::post('/auth', 'App\Http\Controllers\AuthController@login');
